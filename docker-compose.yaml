@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  php-fpm:
+    container_name: phpfpm
+    build:
+      context: ./php-fpm
+      args:
+        group_name: app
+        group_id: 1000
+        user_name: app
+        user_id: 1000
+    environment:
+      COMPOSER_AUTH: ${COMPOSER_AUTH}
+    volumes:
+      - ./magento:/var/www/html
+      - ./php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+  web:
+    container_name: web 
+    build: ./web
+    ports:
+      - 80:80
+    volumes:
+      - ./magento:/var/www/html
+    depends_on:
+      - php-fpm
+  mysql:
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      - MYSQL_DATABASE=magentodb
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./magento:/var/www/html
+  elasticsearch:
+    image: elasticsearch:7.17.13
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      - discovery.type=single-node
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+  redis:
+    image: redis:7.0
+    ports:
+      - 6379:6379
+volumes:
+  mysql_data:
+    driver: local
+  myapp_data:
+    driver: local
