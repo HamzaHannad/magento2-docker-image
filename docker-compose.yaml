@@ -6,9 +6,9 @@ services:
     build:
       context: ./php-fpm
       args:
-        group_name: app
+        group_name: magento
         group_id: 1000
-        user_name: app
+        user_name: magento
         user_id: 1000
     environment:
       COMPOSER_AUTH: ${COMPOSER_AUTH}

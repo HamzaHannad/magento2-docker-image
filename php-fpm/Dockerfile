@@ -46,7 +46,7 @@ ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # Install composer
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
-ENV COMPOSER_AUTH='{"http-basic":{"repo.magento.com":{"username":"aacb481a7547084ce5f87deb2e2ee690","password":"238777909dbd96401e136eb44ed3dbcc"}}}'
+
 # Setting the user
 RUN groupadd -g ${group_id} ${group_name} \
  && useradd -g ${group_id} -u ${user_id} -d /var/www -s /bin/bash ${user_name}
@@ -54,5 +54,6 @@ RUN mkdir -p /var/www/html \
    && chown -R ${user_name}:${group_name} /var/www
 
 USER ${user_name}:${group_name}
+
 VOLUME /var/www
 WORKDIR /var/www/html
