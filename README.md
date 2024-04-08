@@ -58,10 +58,22 @@ bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth Magento_TwoFactorA
 `admin password = admin123`
 
 ### Robo Commands
-`robo up`: *Start all the services*
 
-`robo down`: *Stop all the services*
+*Start all the services*
+```bash 
+robo up
+```
+*Stop all the services*
+```bash
+robo down
+```
 
-`robo restart`: *Restart all the services*
+*Restart all the services*
+```bash
+robo restart
+```
 
-`robo shell`: *Access the Magento container's shell*
+*Access the Magento container's shell*
+```bash
+robo shell
+```
