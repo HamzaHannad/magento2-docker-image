@@ -6,9 +6,9 @@ services:
     build:
       context: ./php-fpm
       args:
-        group_name: magento
+        group_name: app
         group_id: 1000
-        user_name: magento
+        user_name: app
         user_id: 1000
     environment:
       COMPOSER_AUTH: ${COMPOSER_AUTH}
@@ -51,6 +51,4 @@ services:
       - 6379:6379
 volumes:
   mysql_data:
-    driver: local
-  myapp_data:
     driver: local

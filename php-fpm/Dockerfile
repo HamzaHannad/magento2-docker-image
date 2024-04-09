@@ -54,6 +54,5 @@ RUN mkdir -p /var/www/html \
    && chown -R ${user_name}:${group_name} /var/www
 
 USER ${user_name}:${group_name}
-
 VOLUME /var/www
 WORKDIR /var/www/html
