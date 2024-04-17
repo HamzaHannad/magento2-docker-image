@@ -30,7 +30,7 @@
   bin/magento setup:config:set --backend-frontname='admin'
   ```
   <br />
-*Optional commands :*
+### Optional commands :
 ```bash
 bin/magento deploy:mode:set developer
 ```
@@ -38,14 +38,26 @@ bin/magento deploy:mode:set developer
 bin/magento maintenance:disable
 ```
 ```bash
-bin/magento sampledata:deploy
-```
-```bash
 bin/magento cache:disable layout full_page block_html translate
 ```
 ```bash
 bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth Magento_TwoFactorAuth
 ```
+  <br />
+
+### Install sample-data :
+- Run
+
+```bash
+bin/magento sampledata:deploy
+```
+```bash
+bin/magento module:enable Magento_CustomerSampleData Magento_MsrpSampleData Magento_CatalogSampleData Magento_DownloadableSampleData Magento_OfflineShippingSampleData Magento_BundleSampleData Magento_ConfigurableSampleData Magento_ThemeSampleData Magento_ProductLinksSampleData Magento_ReviewSampleData Magento_CatalogRuleSampleData Magento_SwatchesSampleData Magento_GroupedProductSampleData Magento_TaxSampleData Magento_CmsSampleData Magento_SalesRuleSampleData Magento_SalesSampleData Magento_WidgetSampleData Magento_WishlistSampleData
+```
+```bash
+bin/magento setup:upgrade
+```
+
 
 ### Notes
 
