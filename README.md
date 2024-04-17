@@ -1,10 +1,10 @@
 #### Installation of Magento 2 project with Docker.
 
 **Steps:**
-+ Clone the project into your directory.
-+ Create magento directory
++ Clone the repository.
++ Access to the Magento-2-Docker-Setup directory.
   ```bash
-  mkdir magento
+  cd Magento-2-Docker-Setup
   ```
 + Before setup, ensure the following:
   + Make sure ``Robo`` is installed on your machine.
@@ -17,30 +17,28 @@
   ```bash
   robo shell
   ```
-    ```bash
-    bin/magento setup:install --base-url=http://my.magento.test \
-                --db-host=mysql --db-name=magentodb --db-user=root --db-password=root \
-                --admin-firstname=admin --admin-lastname=admin --admin-email=admin@admin.com \
-                --admin-user=admin --admin-password=admin123 --language=en_US \
-                --currency=USD --timezone=America/Chicago --use-rewrites=1 \
-                --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch \
-                --elasticsearch-port=9200
-    ```
+  ```bash
+  bin/magento setup:install --base-url=http://my.magento.test \
+              --db-host=mysql --db-name=magentodb --db-user=root --db-password=root \
+              --admin-firstname=admin --admin-lastname=admin --admin-email=admin@admin.com \
+              --admin-user=admin --admin-password=admin123 --language=en_US \
+              --currency=USD --timezone=America/Chicago --use-rewrites=1 \
+              --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch \
+              --elasticsearch-port=9200
+  ```
   ```bash
   bin/magento setup:config:set --backend-frontname='admin'
   ```
   <br />
 *Optional commands :*
-
 ```bash
-bin/magento deploy:mode:set developer.
-```
-
-```bash
-bin/magento maintenance:disable.
+bin/magento deploy:mode:set developer
 ```
 ```bash
-bin/magento sampledata:deploy.
+bin/magento maintenance:disable
+```
+```bash
+bin/magento sampledata:deploy
 ```
 ```bash
 bin/magento cache:disable layout full_page block_html translate
