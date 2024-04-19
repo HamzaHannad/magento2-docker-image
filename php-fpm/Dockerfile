@@ -35,14 +35,8 @@ COPY docker-php-ram-limit.ini /usr/local/etc/php/conf.d/
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
 # Install Nodejs
-ENV NODE_VERSION=16.14
-RUN apt install -y curl
-RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-ENV NVM_DIR=/root/.nvm
-RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
-RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
-ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt-get update && apt-get install -y nodejs npm
 
 # Install composer
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
