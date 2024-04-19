@@ -91,3 +91,35 @@ robo restart
 ```bash
 robo shell
 ```
+<br />
+
+### Setting up Grunt
+
+
+#### 1 - Accessing the Container as Root User
+```bash
+docker exec -u root -it phpfpm bash
+```
+#### 2 - Installing Grunt CLI Globally
+```bash
+npm install -g grunt-cli
+```
+#### 3 - Copying Configuration Files
+```bash
+cp package.json.sample package.json
+cp Gruntfile.js.sample Gruntfile.js
+cp grunt-config.json.sample grunt-config.json
+```
+#### 4 - Installing Dependencies
+```bash
+npm install
+```
+#### 5 - Creating Local Themes Configuration File
+```bash
+cd dev/tools/grunt/configs
+cp themes.js local-themes.js
+```
+#### 6 - Exiting from Root User
+```bash
+exit
+```
