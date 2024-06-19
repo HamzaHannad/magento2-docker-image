@@ -1,4 +1,6 @@
-FROM php:8.1-rc-fpm AS php-fpm
+ARG PHP_IMAGE
+
+FROM ${PHP_IMAGE} AS php-fpm
 
 ARG group_name=app
 ARG group_id=1000

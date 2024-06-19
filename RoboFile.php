@@ -1,4 +1,6 @@
-<?php
+<?php declare(strict_types = 1);
+
+use Symfony\Component\Dotenv\Dotenv;
 
 /**
  * This is project's console commands configuration for Robo task runner.
@@ -7,6 +9,12 @@
  */
 class RoboFile extends \Robo\Tasks
 {
+    public function __construct()
+    {
+        $dotenv = new Dotenv();
+        $dotenv->load(__DIR__.'/.env');
+    }
+
     private function callDockerCompose()
     {
         return 'docker-compose';
@@ -34,8 +42,9 @@ class RoboFile extends \Robo\Tasks
 
     public function magentoComposerInstall()
     {
+        $magentoVersion = $_ENV['MAGENTO_VERSION'];
         $cmd = <<< EOF
-            docker exec -it --user 1000 phpfpm bash -c 'composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=2.4.6 && mv project-community-edition/*  . && rm -rf project-community-edition/'
+            docker exec -it --user 1000 phpfpm bash -c 'composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition=$magentoVersion && mv project-community-edition/*  . && rm -rf project-community-edition/'
         EOF;
 
         $this->taskExec($cmd)->run();

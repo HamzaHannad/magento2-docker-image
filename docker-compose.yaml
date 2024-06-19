@@ -10,6 +10,7 @@ services:
         group_id: 1000
         user_name: app
         user_id: 1000
+        PHP_IMAGE: ${PHP_IMAGE}
     environment:
       COMPOSER_AUTH: ${COMPOSER_AUTH}
     volumes:
