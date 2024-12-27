@@ -121,7 +121,11 @@ npm install
 cd dev/tools/grunt/configs
 cp themes.js local-themes.js
 ```
-#### 6 - Exiting from Root User
+#### 6 - Symlink Grunt to a Standard Path 
+```bash
+ln -s /var/www/html/node_modules/grunt-cli/bin/grunt /usr/local/bin/grunt
+```
+#### 7 - Exiting from Root User
 ```bash
 exit
 ```
