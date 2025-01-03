@@ -32,7 +32,7 @@
   bin/magento setup:config:set --backend-frontname='admin'
   ```
   <br />
-### Optional commands :
+### Optional commands
 ```bash
 bin/magento deploy:mode:set developer
 ```
@@ -45,9 +45,30 @@ bin/magento cache:disable layout full_page block_html translate
 ```bash
 bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth Magento_TwoFactorAuth
 ```
+<br />
+
+### Varnish Configuration
+- Run
+
+```bash
+bin/magento config:set system/full_page_cache/caching_application 2
+```
+```bash
+bin/magento setup:config:set --http-cache-hosts=varnish:80
+```
+```bash
+bin/magento config:set system/full_page_cache/varnish/access_list "localhost,php-fpm,web"
+```
+```bash
+bin/magento config:set system/full_page_cache/varnish/backend_host web
+```
+```bash
+bin/magento config:set system/full_page_cache/varnish/backend_port 8080
+```
+
   <br />
 
-### Install sample-data :
+### Install sample-data
 - Run
 
 ```bash
@@ -59,44 +80,9 @@ bin/magento module:enable Magento_CustomerSampleData Magento_MsrpSampleData Mage
 ```bash
 bin/magento setup:upgrade
 ```
-
-
-### Notes
-
-`database name = magentodb`
-
-`url = `http://my.magento.test
-
-`admin url = `http://my.magento.test/admin
-
-`admin username = admin`
-
-`admin password = admin123`
-
-### Robo Commands
-
-*Start all the services*
-```bash 
-robo up
-```
-*Stop all the services*
-```bash
-robo down
-```
-
-*Restart all the services*
-```bash
-robo restart
-```
-
-*Access the Magento container's shell*
-```bash
-robo shell
-```
-<br />
+ <br />
 
 ### Setting up Grunt
-
 
 #### 1 - Accessing the Container as Root User
 ```bash
@@ -129,3 +115,38 @@ ln -s /var/www/html/node_modules/grunt-cli/bin/grunt /usr/local/bin/grunt
 ```bash
 exit
 ```
+ <br />
+
+### Robo Commands
+
+*Start all the services*
+```bash 
+robo up
+```
+*Stop all the services*
+```bash
+robo down
+```
+
+*Restart all the services*
+```bash
+robo restart
+```
+
+*Access the Magento container's shell*
+```bash
+robo shell
+```
+ <br />
+
+### Notes
+
+`database name = magentodb`
+
+`url = `http://my.magento.test
+
+`admin url = `http://my.magento.test/admin
+
+`admin username = admin`
+
+`admin password = admin123`
