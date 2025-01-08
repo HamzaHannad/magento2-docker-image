@@ -43,6 +43,13 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
 # Install composer
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
+# Install blackfire prob
+RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
+    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
+    && mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
+    && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini
+
 # Setting the user
 RUN groupadd -g ${group_id} ${group_name} \
  && useradd -g ${group_id} -u ${user_id} -d /var/www -s /bin/bash ${user_name}

@@ -68,6 +68,11 @@ bin/magento config:set system/full_page_cache/varnish/backend_port 8080
 
   <br />
 
+### Blackfire Integration
+- Make sure to update the Blackfire credentials in the `.env` file with your own.
+
+  <br />
+
 ### Install sample-data
 - Run
 
