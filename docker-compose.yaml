@@ -71,6 +71,11 @@ services:
       BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
       BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
       BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - "1025:1025"
+      - "8025:8025"
 volumes:
   mysql_data:
     driver: local

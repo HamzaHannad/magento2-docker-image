@@ -40,6 +40,14 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get update && apt-get install -y nodejs npm
 
+# Install mhsendmail for Mailhog integration
+RUN curl -L https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64 -o mhsendmail_linux_amd64 \
+    && chmod +x mhsendmail_linux_amd64 \
+    && mv mhsendmail_linux_amd64 /usr/local/bin/mhsendmail
+
+# Configure PHP to use mhsendmail
+RUN echo 'sendmail_path = "/usr/local/bin/mhsendmail --smtp-addr=mailhog:1025"' > /usr/local/etc/php/conf.d/mailhog.ini
+
 # Install composer
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
